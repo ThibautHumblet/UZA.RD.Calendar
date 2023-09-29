@@ -1,0 +1,72 @@
+$white: #ffffff;
+
+$theme-colors: (
+    "light": #e8e9fc,
+    "dark": #1a162f,
+    "primary": #005abd,
+    "secondary": #798fa4,
+    "info": #de9515,
+    "accent1": #1c3a76,
+    "accent2": #be006c,
+    "accent3": #32a095,
+    "accent4": #af0039,
+    "success": #5da100,
+    "warning": #ffbe69,
+    "danger": #f00066,
+    "off-white": #f8f9fb,
+    "gray": #555555
+);
+
+$form-check-input-checked-bg-color: map-get($theme-colors, 'accent2');
+$form-check-input-indeterminate-bg-color: $form-check-input-checked-bg-color;
+
+$table-variants: (
+    "primary": map-get($theme-colors, 'primary'),
+    "light": map-get($theme-colors, 'light'),
+    "accent1": map-get($theme-colors, 'accent1')
+);
+
+$border-variants: (
+    "primary": map-get($theme-colors, 'primary'),
+    "accent4": map-get($theme-colors, 'accent4'),
+);
+
+$btn-variants: (
+    "gray": map-get($theme-colors, 'gray'),
+    "accent4": map-get($theme-colors, 'accent4'),
+);
+
+$btn-outline-variants: (
+    "gray": map-get($theme-colors, 'gray'),
+    "accent4": map-get($theme-colors, 'accent4'),
+);
+
+$breadcrumb-divider: quote(">");
+
+$utilities: () !default;
+
+$utilities: map-merge((
+    "min-height": (
+        property: min-height,
+        class: min-h,
+        responsive: true,
+        values: (
+            110px: 110px
+        )
+    )
+), $utilities);
+
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-padding-y: .2rem;
+
+
+@import "bootstrap";
+
+$utilities: map-merge((
+    "clickable": (
+        property: cursor,
+        class: clickable,
+        responsive: true,
+        values: "pointer"
+    )
+), $utilities);
