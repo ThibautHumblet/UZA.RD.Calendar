@@ -3,15 +3,28 @@ using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigurationManager configuration = builder.Configuration;
+
+string corsPolicy = "StandardCors";
+
+string[]? allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>();
+allowedOrigins ??= new string[] { string.Empty };
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicy, builder =>
+    {
+        builder
+        .WithOrigins(allowedOrigins)
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-
-ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -89,6 +102,8 @@ if (app.Environment.IsDevelopment())
         c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
     });
 }
+
+app.UseCors(corsPolicy);
 
 app.UseHttpsRedirection();
 
